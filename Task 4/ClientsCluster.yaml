@@ -1,0 +1,24 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: client-admin-role
+  namespace: ClientsCluster
+rules:
+- apiGroups: ["*"]
+  resources: ["*"]
+  verbs: ["*"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: client-admin-binding
+  namespace: ClientsCluster
+subjects:
+- kind: Group
+  name: client-admins
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: client-admin-role
+  apiGroup: rbac.authorization.k8s.io
